@@ -11,6 +11,7 @@
         <el-divider direction="vertical" border-style="dashed" />
         <span>备案号</span>
     </div>
+    <br/>
 </template>
 
 <script setup>

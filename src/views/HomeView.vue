@@ -2,7 +2,7 @@
   <ContentBaseVue>
     <el-row :gutter="12">
       <el-col :xs="24" :sm="18">
-        <el-alert  title="欢迎来到 Bots" type="success" description="你可以创建游戏桌来进行对局。" center/>
+        <el-alert title="欢迎来到 Bots" type="success" description="你可以创建游戏桌来进行对局。" center />
         <el-card shadow="always">
           <p>●咏唱春天，真的，在共同的心跳当中，我们都是心灵的流浪者。</p>
           <p>这最寒冷的季节，早被我们孕育出新的火焰，</p>
@@ -12,20 +12,6 @@
           <p>且看脚步如犁，辛勤播种并耕耘又一场绿意，</p>
           <p>向着新的年轮，让我们情系壮美家园，共咏诗意春天！</p>
           <p>共同着我和你、他和她每一个春景的诗情画意。</p>
-        </el-card>
-        <!-- 表单 -->
-        <el-card shadow="always" style="margin-top:20px">
-          <el-table :data="userTableData" stripe style="width: 100%">
-
-            <el-table-column prop="photo" label="头像" width="180">
-              <!-- 图片的显示 -->
-              <template #default="scope">
-                <img :src="scope.row.photo" min-width="45" height="45" />
-              </template>
-            </el-table-column>
-            <el-table-column prop="username" label="用户名" width="180" />
-            <el-table-column prop="followerCount" label="粉丝数" />
-          </el-table>
         </el-card>
       </el-col>
 
@@ -54,18 +40,6 @@
 
 <script setup>
 import ContentBaseVue from '@/components/ContentBase.vue';
-
-import $ from "jquery";
-import { ref } from "vue";
-// 用户列表
-let userTableData = ref([]);
-$.ajax({
-  url: "https://app165.acapp.acwing.com.cn/myspace/userlist/",
-  type: "get",
-  success(resp) {
-    userTableData.value = resp;
-  }
-})
 </script>
 
 <style scoped>

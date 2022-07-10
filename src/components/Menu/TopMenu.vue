@@ -1,31 +1,33 @@
 <template>
   <el-menu :default-active="activeIndex" class="el-menu-demo" 
-  mode="horizontal" :ellipsis="false"
+  mode="horizontal" :ellipsis="false" router 
     @select="handleSelect">
-    <el-menu-item index="0">ZIMEI</el-menu-item>
+    <el-menu-item index="/233">ZIMEI</el-menu-item>
+    <el-menu-item index="/">首页</el-menu-item>
 
     <el-sub-menu index="1" class="hidden-md-and-up">
       <template #title>功能</template>
-      <el-menu-item index="1-1">游戏</el-menu-item>
-      <el-menu-item index="1-2">排行榜</el-menu-item>
-      <el-menu-item index="1-3">回放</el-menu-item>
+      <el-menu-item index="/userlist">用户列表</el-menu-item>
+      <el-menu-item index="/userprofile" :route="{name:'userprofile',query:{userId:6}}">用户动态</el-menu-item>
     </el-sub-menu>
 
-    <el-menu-item index="2" class="hidden-sm-and-down">游戏</el-menu-item>
-    <el-menu-item index="3" class="hidden-sm-and-down">排行榜</el-menu-item>
-    <el-menu-item index="4" class="hidden-sm-and-down">回放</el-menu-item>
+    <el-menu-item index="/userlist" class="hidden-sm-and-down">用户列表</el-menu-item>
+    <el-menu-item index="/userprofile" class="hidden-sm-and-down" :route="{name:'userprofile',query:{userId:6}}">用户动态</el-menu-item>
 
     <div class="flex-grow" />
-    <el-menu-item index="5">登录</el-menu-item>
-    <el-menu-item index="6">注册</el-menu-item>
+    <el-menu-item index="/login">登录</el-menu-item>
+    <el-menu-item index="/regist">注册</el-menu-item>
   </el-menu>
 </template>
 
 <script  setup>
-import { ref } from 'vue'
 import 'element-plus/theme-chalk/display.css'
+import {  useRoute } from "vue-router"
 
-const activeIndex = ref('1')
+const route=useRoute();
+const activeIndex = route.path;
+
+
 const handleSelect = (key, keyPath) => {
   console.log(key, keyPath)
 }

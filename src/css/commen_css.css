@@ -1,4 +1,4 @@
-.html,body{
+/*.html,body{*/
     /* background-color: #f2f2f5; */
         /* background-image: url('https://img.zimei.xyz/202207101321009.jpg');
         background-position-x: initial;
@@ -8,7 +8,7 @@
         background-clip: initial;
         background-color: white;
         background-size: 100% 100%; */
-}
+/* } */
 
 .el-alert {
     margin-bottom: 20px;
