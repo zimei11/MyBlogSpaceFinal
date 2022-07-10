@@ -1,8 +1,9 @@
 <template>
-<div>hello world</div>
+<ContentBaseVue></ContentBaseVue>
 </template>
 
 <script setup>
+import ContentBaseVue from '@/components/ContentBase.vue';
 </script>
 
 <style scoped>
