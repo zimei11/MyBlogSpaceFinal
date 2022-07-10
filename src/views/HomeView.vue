@@ -1,5 +1,17 @@
 <template>
-<ContentBaseVue></ContentBaseVue>
+  <ContentBaseVue>
+    <el-row :gutter="12">
+      <el-col :span="12">
+        <el-card shadow="hover">
+        </el-card>
+      </el-col>
+
+      <el-col :span="12">
+        <el-card shadow="hover">
+        </el-card>
+      </el-col>
+    </el-row>
+  </ContentBaseVue>
 </template>
 
 <script setup>
