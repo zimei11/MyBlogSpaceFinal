@@ -2,8 +2,8 @@
   <ContentBaseVue>
     <el-row :gutter="12">
       <el-col :xs="24" :sm="18">
-        <el-alert title="欢迎来到 Bots" type="success" description="你可以创建游戏桌来进行对局。" center/>
-        <el-card shadow="always" style="margin-top:20px">
+        <el-alert  title="欢迎来到 Bots" type="success" description="你可以创建游戏桌来进行对局。" center/>
+        <el-card shadow="always">
           <p>●咏唱春天，真的，在共同的心跳当中，我们都是心灵的流浪者。</p>
           <p>这最寒冷的季节，早被我们孕育出新的火焰，</p>
           <p>当雪花融为眼中最具激情的诗意，孕育着一个个美好的风情，</p>
