@@ -39,7 +39,7 @@ const routes = [
   },
   {
     path: '/:catchAll(.*)',
-    redirect:"/",
+    redirect:"/404/",
   },
 ]
 

@@ -2,7 +2,7 @@
   <el-menu :default-active="activeIndex" class="el-menu-demo" 
   mode="horizontal" :ellipsis="false" router 
     @select="handleSelect">
-    <el-menu-item index="/233/">ZIMEI</el-menu-item>
+    <el-menu-item index="1" route="/">ZIMEI</el-menu-item>
     <el-menu-item index="/">首页</el-menu-item>
 
     <el-sub-menu index="1" class="hidden-md-and-up">
