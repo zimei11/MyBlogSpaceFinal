@@ -1,4 +1,5 @@
 <template>
+    <el-backtop :right="20" :bottom="50" />
     <div class="common-layout">
         <el-container>
             <el-header>
@@ -7,8 +8,8 @@
             <el-main>
                 <el-row :gutter="0">
                     <el-col :span="24">
-                        <el-card shadow="never" style="background-color:#f2f2f5"> 
-                        <slot></slot>
+                        <el-card shadow="never" style="background-color:#f2f2f5">
+                            <slot></slot>
                         </el-card>
                     </el-col>
                 </el-row>

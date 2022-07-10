@@ -1,5 +1,6 @@
 <template>
-  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false"
+  <el-menu :default-active="activeIndex" class="el-menu-demo" 
+  mode="horizontal" :ellipsis="false"
     @select="handleSelect">
     <el-menu-item index="0">ZIMEI</el-menu-item>
 
