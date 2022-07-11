@@ -27,7 +27,7 @@
                     </el-button>
                   </el-col>
                   <el-col :xs="24" :sm="12">
-                    <el-button class="button" style="width:100%">取消</el-button>
+                    <el-button class="button" @click="cancel" style="width:100%">取消</el-button>
                   </el-col>
                 </el-form-item>
               </el-form>
@@ -52,8 +52,12 @@ let username = ref("");
 let password = ref("");
 let error_message = ref("");
 
+const cancel = () => {
+  router.push({name: 'home'});
+}
+
 const login = () => {
-  error_message.value="";
+  error_message.value = "";
   store.dispatch("login", {
     username: username.value,
     password: password.value,

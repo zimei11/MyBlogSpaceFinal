@@ -7,23 +7,32 @@ const ModuleUser = {
         username: "",
         photo: "",
         followerCount: 0,
-        access:"",
-        refresh:"",
-        is_login:false,
+        access: "",
+        refresh: "",
+        is_login: false,
     },
     getters: {},
     mutations: {
-        updateUser(state,user){
-            state.id=user.id;
-            state.username=user.username;
-            state.photo=user.photo;
-            state.followerCount=user.followerCount;
-            state.access=user.access;
-            state.refresh=user.refresh;
-            state.is_login=user.is_login;
+        updateUser(state, user) {
+            state.id = user.id;
+            state.username = user.username;
+            state.photo = user.photo;
+            state.followerCount = user.followerCount;
+            state.access = user.access;
+            state.refresh = user.refresh;
+            state.is_login = user.is_login;
         },
-        updateAccess(state,access){
-            this.state.access=access;
+        updateAccess(state, access) {
+            this.state.access = access;
+        },
+        logout(state) {
+            state.id = "";
+            state.username = "";
+            state.photo = "";
+            state.followerCount = 0;
+            state.access = "";
+            state.refresh = "";
+            state.is_login = false;
         }
     },
     actions: {
@@ -36,47 +45,48 @@ const ModuleUser = {
                     password: data.password,
                 },
                 success(resp) {
-                    const {access,refresh}= resp;
-                    const access_obj=jwt_decode(access);
+                    const {access, refresh} = resp;
+                    const access_obj = jwt_decode(access);
 
-                    setInterval(()=>{
+                    setInterval(() => {
                         $.ajax({
-                            url:"https://app165.acapp.acwing.com.cn/api/token/refresh/",
-                            type:"POST",
-                            data:{
+                            url: "https://app165.acapp.acwing.com.cn/api/token/refresh/",
+                            type: "POST",
+                            data: {
                                 refresh,
                             },
-                            success(resp){
-                                context.commit("updateAccess",resp.access);
+                            success(resp) {
+                                context.commit("updateAccess", resp.access);
                             }
                         });
-                    },4.5*60*1000);
+                    }, 4.5 * 60 * 1000);
 
                     $.ajax({
-                        url:"https://app165.acapp.acwing.com.cn/myspace/getinfo/",
-                        type:"GET",
-                        data:{
-                            user_id:access_obj.user_id,
+                        url: "https://app165.acapp.acwing.com.cn/myspace/getinfo/",
+                        type: "GET",
+                        data: {
+                            user_id: access_obj.user_id,
                         },
-                        headers:{
-                            'Authorization': "Bearer "+access,
+                        headers: {
+                            'Authorization': "Bearer " + access,
                         },
-                        success(resp){
-                            context.commit("updateUser",{
+                        success(resp) {
+                            context.commit("updateUser", {
                                 ...resp,
-                                access:access,
-                                refresh:refresh,
-                                is_login:true,
+                                access: access,
+                                refresh: refresh,
+                                is_login: true,
                             });
                             data.success();
                         }
                     })
                 },
-                error(){
+                error() {
                     data.error();
                 }
             });
-        }
+        },
+
     },
     modules: {}
 }
