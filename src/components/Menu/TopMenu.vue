@@ -44,7 +44,7 @@ const handleSelect = (key, keyPath) => {
 }
 </script>
 
-<style>
+<style scoped>
 .flex-grow {
   flex-grow: 1;
 }

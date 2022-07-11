@@ -43,4 +43,8 @@ import TopMenuVue from './Menu/TopMenu.vue';
 .box-card {
     width: 480px;
 }
+
+.el-container{
+    margin:8px;
+}
 </style>
