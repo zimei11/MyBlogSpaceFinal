@@ -7,14 +7,16 @@
       <template #title>菜单</template>
       <el-menu-item index="/">首页</el-menu-item>
       <el-menu-item index="/userlist/">用户列表</el-menu-item>
-      <el-menu-item index="/userprofile/" :route="{ name: 'userprofile', query: { userId: 6 } }">我的动态</el-menu-item>
+      <el-menu-item index="/userprofile/" :route="{ name: 'userprofile', query: { userId: $store.state.user.id } }"
+                    v-if="$store.state.user.is_login">用户动态
+      </el-menu-item>
     </el-sub-menu>
 
     <el-menu-item index="/" class="hidden-sm-and-down">首页</el-menu-item>
     <el-menu-item index="/userlist/" class="hidden-sm-and-down">用户列表</el-menu-item>
     <el-menu-item index="/userprofile/" class="hidden-sm-and-down"
                   v-if="$store.state.user.is_login"
-                  :route="{ name: 'userprofile', query: { userId: $store.state.user.id } }">我的动态
+                  :route="{ name: 'userprofile', query: { userId: $store.state.user.id } }">用户动态
     </el-menu-item>
 
     <div class="flex-grow"></div>
