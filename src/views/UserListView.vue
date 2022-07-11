@@ -3,7 +3,7 @@
         <el-alert title="用户列表" type="success" description="这里包含了所有的用户" center />
         <!-- 表单 -->
         <el-card shadow="always" style="margin-top:20px">
-            <el-table :data="userTableData" stripe style="width: 100%">
+            <el-table :data="userTableData" stripe style="width: 100%" @row-click="open_user_profile">
 
                 <el-table-column prop="photo" label="头像" width="180">
                     <!-- 图片的显示 -->
@@ -22,6 +22,11 @@
 import ContentBaseVue from '@/components/ContentBase.vue';
 import $ from "jquery";
 import { ref } from "vue";
+import router from '@/router/index';
+import {useStore} from 'vuex';
+
+const store=useStore();
+
 // 用户列表
 let userTableData = ref([]);
 $.ajax({
@@ -30,7 +35,22 @@ $.ajax({
   success(resp) {
     userTableData.value = resp;
   }
-})
+});
+
+const open_user_profile=userId=>{
+  if(store.state.user.is_login){
+    router.push({
+      name:"userprofile",
+      params:{
+        userId
+      }
+    })
+  }else{
+    router.push({
+      name:"login"
+    });
+  }
+}
 </script>
 
 <style scoped>
