@@ -5,7 +5,7 @@
       <el-row :gutter="10">
         <el-col :sm="8" :md="6">
           <UserInfoVue :user="user" @follow="follow" @unfollow="unfollow"/>
-          编辑动态
+          <UserWriteVue v-if="is_me" @post_a_post="post_a_post"/>
         </el-col>
         <el-col :sm="16" :md="18">
           <UserPostVue :posts="posts" :user="user" @delete_a_post="delete_a_post"/>
@@ -17,12 +17,13 @@
 
 <script setup>
 import ContentBaseVue from '@/components/ContentBase.vue';
-import {useRoute} from "vue-router"
+import {useRoute} from "vue-router";
 import UserInfoVue from '@/components/userprofile/UserInfo';
 import {useStore} from "vuex";
 import $ from 'jquery';
-import {reactive} from "vue";
+import {computed, reactive} from "vue";
 import UserPostVue from "@/components/userprofile/UserPost";
+import UserWriteVue from "@/components/userprofile/UserWrite";
 
 const route = useRoute();
 const userId = parseInt(route.query.userId);
@@ -48,6 +49,7 @@ $.ajax({
     user.photo = resp.photo;
     user.followerCount = resp.followerCount;
     user.is_followed = resp.is_followed;
+    // console.log(typeof route.query.userId+typeof store.state.user.id);
   }
 });
 
@@ -63,7 +65,15 @@ const unfollow=()=>{
   user.followerCount--;
 };
 
-//用户帖子
+//删除帖子
+const delete_a_post=post_id=>{
+  posts.posts = posts.posts.filter(post => post.id !== post_id);
+  posts.count = posts.posts.length;
+}
+
+//发布帖子
+const is_me = computed(() => userId === store.state.user.id);
+
 $.ajax({
   url: "https://app165.acapp.acwing.com.cn/myspace/post/",
   type: "GET",
@@ -79,9 +89,12 @@ $.ajax({
   }
 });
 
-//删除帖子
-const delete_a_post=post_id=>{
-  posts.posts = posts.posts.filter(post => post.id !== post_id);
-  posts.count = posts.posts.length;
-}
+const post_a_post = content => {
+  posts.count ++ ;
+  posts.posts.unshift({
+    id: posts.count,
+    userId: userId,
+    content: content,
+  })
+};
 </script>

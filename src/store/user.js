@@ -23,7 +23,7 @@ const ModuleUser = {
             state.is_login = user.is_login;
         },
         updateAccess(state, access) {
-            this.state.access = access;
+            state.access = access;
         },
         logout(state) {
             state.id = "";

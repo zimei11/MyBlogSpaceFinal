@@ -3,7 +3,7 @@
     {{ post.content }}
 
     <el-button class="button" size="small" type="danger" v-if="is_me"
-               @click="delete_a_post(post.id)">删除
+                @click="delete_a_post(post.id)">删除
     </el-button>
 
   </el-card>
@@ -16,6 +16,7 @@ import $ from 'jquery';
 
 export default {
   name: "UserPost",
+  emits: ['delete_a_post'],
   props: {
     posts: {
       type: Object,
