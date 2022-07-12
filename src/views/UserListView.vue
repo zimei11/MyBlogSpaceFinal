@@ -1,18 +1,19 @@
 <template>
   <ContentBaseVue>
-    <div class="card" v-for="user in users" :key="user.id" @click="open_user_profile(user.id)">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-1 img-field">
-            <img class="img-fluid" :src="user.photo" alt="">
-          </div>
-          <div class="col-11">
+    <el-card class="box-card" shadow="hover" v-for="user in users" :key="user.id" @click="open_user_profile(user.id)">
+      <div class="text item">
+
+        <el-row :gutter="10">
+          <el-col :span="3">
+            <img class="img-fluid" :src="user.photo" alt="用户头像">
+          </el-col>
+          <el-col :span="21">
             <div class="username">{{ user.username }}</div>
             <div class="follower-count">{{ user.followerCount }}</div>
-          </div>
-        </div>
+          </el-col>
+        </el-row>
       </div>
-    </div>
+    </el-card>
   </ContentBaseVue>
 </template>
 
@@ -73,14 +74,9 @@ img {
   height: 50%;
 }
 
-.card {
+.el-card {
   margin-bottom: 20px;
   cursor: pointer;
-}
-
-.card:hover {
-  box-shadow: 2px 2px 10px lightgrey;
-  transition: 500ms;
 }
 
 .img-field {
