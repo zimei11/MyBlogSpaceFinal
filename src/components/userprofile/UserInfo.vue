@@ -7,14 +7,18 @@
         </el-col>
         <el-col :span="18">
           <div class="username">
-            {{ user.username}}
+            {{ user.username }}
           </div>
           <div class="fans">
-            {{user.followerCount}}
+            {{ user.followerCount }}
           </div>
-          <el-button type="primary" size="small">
+          <el-button @click="follow" v-if="!user.is_followed" type="primary" size="small">
             +关注
           </el-button>
+           <el-button @click="unfollow" v-if="user.is_followed" type="primary" plain size="small">
+            取消关注
+          </el-button>
+
         </el-col>
       </el-row>
     </div>
@@ -23,14 +27,60 @@
 
 <script>
 
+import {useStore} from "vuex";
+import $ from 'jquery';
+
 export default {
-  name:"UserInfo",
-  props:{
-    user:{
-      type:Object,
-      required:true,
+  name: "UserInfo",
+  props: {
+    user: {
+      type: Object,
+      required: true,
     },
   },
+  setup(props, context) {
+    const store = useStore();
+    const follow = () => {
+      $.ajax({
+        url: "https://app165.acapp.acwing.com.cn/myspace/follow/",
+        type: "POST",
+        data: {
+          target_id: props.user.id,
+        },
+        headers: {
+          'Authorization': "Bearer " + store.state.user.access,
+        },
+        success(resp) {
+          if (resp.result === "success") {
+            context.emit('follow');
+          }
+        }
+      });
+    };
+
+    const unfollow=()=>{
+      $.ajax({
+        url: "https://app165.acapp.acwing.com.cn/myspace/follow/",
+        type: "POST",
+        data: {
+          target_id: props.user.id,
+        },
+        headers: {
+          'Authorization': "Bearer " + store.state.user.access,
+        },
+        success(resp) {
+          if (resp.result === "success") {
+            context.emit('unfollow');
+          }
+        }
+      });
+    };
+
+    return{
+      follow,
+      unfollow,
+    }
+  }
 }
 </script>
 
@@ -48,6 +98,7 @@ img {
   height: 45px;
   width: 45px;
 }
+
 .username {
   font-weight: bold;
 }
