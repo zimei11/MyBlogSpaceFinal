@@ -1,5 +1,6 @@
 <template>
   <ContentBaseVue>
+    <el-alert title="用户列表" type="success" description="你可以查看用户列表" center/>
     <el-card class="box-card" shadow="hover" v-for="user in users" :key="user.id" @click="open_user_profile(user.id)">
       <div class="text item">
 
