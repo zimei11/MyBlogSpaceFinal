@@ -12,10 +12,10 @@
           <div class="fans">
             {{ user.followerCount }}
           </div>
-          <el-button @click="follow" v-if="!user.is_followed" type="primary" size="small">
+          <el-button @click="follow" v-if="!user.is_followed&&!is_me" type="primary" size="small">
             +关注
           </el-button>
-           <el-button @click="unfollow" v-if="user.is_followed" type="primary" plain size="small">
+           <el-button @click="unfollow" v-if="user.is_followed&&!is_me" type="primary" plain size="small">
             取消关注
           </el-button>
 
@@ -29,6 +29,7 @@
 
 import {useStore} from "vuex";
 import $ from 'jquery';
+import {computed} from "vue";
 
 export default {
   name: "UserInfo",
@@ -71,14 +72,16 @@ export default {
         success(resp) {
           if (resp.result === "success") {
             context.emit('unfollow');
+            // console.log(is_me);
           }
         }
       });
     };
-
+    let is_me=computed(()=>store.state.user.id===props.user.id);
     return{
       follow,
       unfollow,
+      is_me,
     }
   }
 }
