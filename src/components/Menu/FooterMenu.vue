@@ -9,9 +9,13 @@
         <el-divider direction="vertical" />
         <span>&copy;zimei</span>
         <el-divider direction="vertical" border-style="dashed" />
-        <span>备案号</span>
+        <span>
+            <el-link href="https://beian.miit.gov.cn/" >
+                苏ICP备2021049515号-2
+            </el-link>
+        </span>
     </div>
-    <br/>
+    <br />
 </template>
 
 <script setup>
